@@ -4,8 +4,7 @@ Copyright © 2024 NAME HERE <EMAIL ADDRESS>
 package cmd
 
 import (
-	"fmt"
-
+	"github.com/giuszeppe/expense-tracker-go-cli/services"
 	"github.com/spf13/cobra"
 )
 
@@ -15,7 +14,7 @@ var listCmd = &cobra.Command{
 	Short: "List all your expense in a table format",
 	Long:  `Will list all your expense in a table format like that: TODO add example`,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("list called")
+		services.ListExpenses()
 	},
 }
 

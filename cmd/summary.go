@@ -4,8 +4,9 @@ Copyright © 2024 NAME HERE <EMAIL ADDRESS>
 package cmd
 
 import (
-	"fmt"
+	"log"
 
+	"github.com/giuszeppe/expense-tracker-go-cli/services"
 	"github.com/spf13/cobra"
 )
 
@@ -15,7 +16,13 @@ var summaryCmd = &cobra.Command{
 	Short: "A summary of your expenses in the last year",
 	Long:  `A summary of your expenses in the last year. Can also be used to summarise a month`,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("summary called")
+		month, _ := cmd.Flags().GetInt("month")
+
+		if month > 12 || month < 0 {
+			log.Fatal("Month must be between 1 and 12")
+		}
+
+		services.Summary(month)
 	},
 }
 

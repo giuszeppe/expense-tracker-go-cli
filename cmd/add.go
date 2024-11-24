@@ -4,8 +4,9 @@ Copyright © 2024 NAME HERE <EMAIL ADDRESS>
 package cmd
 
 import (
-	"fmt"
+	"log"
 
+	"github.com/giuszeppe/expense-tracker-go-cli/services"
 	"github.com/spf13/cobra"
 )
 
@@ -15,7 +16,15 @@ var addCmd = &cobra.Command{
 	Short: "Add an expense",
 	Long:  `Allows you to add an expense with an amount and a description`,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("add called")
+		amount, _ := cmd.Flags().GetFloat64("amount")
+		if amount == 0 {
+			log.Fatal("Insert a valid amount")
+		}
+		description, _ := cmd.Flags().GetString("description")
+		if description == "" {
+			log.Fatal("Insert a valid description")
+		}
+		services.AddExpense(amount, description)
 	},
 }
 
